@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Русский Дар — Традиции Чаепития</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Цвета Хохломы */
+            --kh-red: #E31E24;
+            --kh-black: #1A1919;
+            --kh-gold: #D4AF37;
+            --bg-cream: #FFFDF5;
+            
+            /* Цвета чаев (согласно концепции) */
+            --color-taiga: linear-gradient(135deg, #2C3E50, #4A6572); /* Сибирь/Тайга - темный серо-синий */
+            --color-east: linear-gradient(135deg, #E67E22, #F39C12); /* Восток - оранжевый */
+            --color-caucasus: linear-gradient(135deg, #27AE60, #1E8449); /* Кавказ - зеленый */
+            --color-volga: linear-gradient(135deg, #F1C40F, #f3d250); /* Поволжье - желтый/пшеничный */
+            --color-karelia: linear-gradient(135deg, #2c2541, #483D8B); /* Карелия - темный фиолетовый/черника */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--kh-black);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- ДЕКОР ХОХЛОМА (SVG фоны) --- */
+        .decoration {
+            position: fixed;
+            z-index: 0;
+            pointer-events: none;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        /* Узоры через CSS mask или background-image (имитация) */
+        .corner-tl {
+            top: 0; left: 0;
+            width: 300px; height: 300px;
+            background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L150 0 C100 50 50 100 0 150 Z' fill='%23E31E24' opacity='0.1'/%3E%3Cpath d='M0 0 L100 0 C80 20 60 40 0 100 Z' fill='%23D4AF37' opacity='0.2'/%3E%3Ccircle cx='40' cy='40' r='10' fill='%231A1919' opacity='0.1'/%3E%3Ccircle cx='80' cy='20' r='8' fill='%23E31E24' opacity='0.1'/%3E%3C/svg%3E");
+        }
+        .corner-br {
+            bottom: 0; right: 0;
+            width: 300px; height: 300px;
+            transform: rotate(180deg);
+            background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L150 0 C100 50 50 100 0 150 Z' fill='%23E31E24' opacity='0.1'/%3E%3Cpath d='M0 0 L100 0 C80 20 60 40 0 100 Z' fill='%23D4AF37' opacity='0.2'/%3E%3C/svg%3E");
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            z-index: 1;
+            height: 100vh; /* На весь экран */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin-bottom: 220px; /* Отступ под слайдер */
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--kh-black);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1.2;
+        }
+        
+        h1 span {
+            color: var(--kh-red);
+            font-family: 'Times New Roman', serif; /* Для контраста в стиле "Русь" */
+            font-style: italic;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            font-weight: 400;
+            margin-bottom: 40px;
+        }
+
+        .accent-text {
+            color: var(--kh-red);
+            font-weight: 600;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--kh-red);
+            color: white;
+            padding: 18px 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(227, 30, 36, 0.4);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+
+        .cta-btn:hover {
+            background-color: transparent;
+            border-color: var(--kh-red);
+            color: var(--kh-red);
+            transform: translateY(-3px);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(227, 30, 36, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(227, 30, 36, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(227, 30, 36, 0); }
+        }
+
+        /* --- INFINITE SLIDER (MARQUEE) --- */
+        .slider-wrapper {
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            width: 100%;
+            height: 320px; /* Высота карточки + отступы */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to top, rgba(255,253,245,1) 0%, rgba(255,253,245,0) 100%);
+        }
+
+        .track {
+            display: flex;
+            gap: 30px;
+            position: absolute;
+            left: 0;
+            animation: scroll 40s linear infinite;
+            padding: 0 15px;
+        }
+
+        .slider-wrapper:hover .track {
+            animation-play-state: paused; /* Стоп при наведении */
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* Движемся на половину (так как контент сдублирован) */
+        }
+
+        /* --- CARD STYLES (FLIP) --- */
+        .card {
+            background-color: transparent;
+            width: 200px;
+            height: 280px;
+            perspective: 1000px; /* Для 3D */
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-radius: 15px;
+        }
+
+        /* Переворот при наведении на саму карточку */
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Лицевая сторона - Название и Банка (схематично) */
+        .card-front {
+            color: white;
+            justify-content: flex-end;
+            padding-bottom: 40px;
+            /* Градиент задается в HTML через style */
+        }
+
+        .card-front h3 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: auto;
+            margin-top: 40px;
+            opacity: 0.8;
+        }
+
+        /* Обратная сторона - Состав */
+        .card-back {
+            background-color: white;
+            color: var(--kh-black);
+            transform: rotateY(180deg);
+            border: 2px solid var(--kh-gold);
+        }
+
+        .card-back h4 {
+            color: var(--kh-red);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .card-back p {
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        /* --- QUIZ MODAL --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(255, 253, 245, 0.95);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .modal-active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .quiz-container {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid var(--kh-red);
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            text-align: center;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L20 0 L0 20 Z' fill='%23E31E24' opacity='0.05'/%3E%3C/svg%3E");
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--kh-black);
+            transition: color 0.2s;
+        }
+        .close-btn:hover { color: var(--kh-red); }
+
+        .question-step {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .question-step.active { display: block; }
+
+        .q-title {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option-btn {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover {
+            border-color: var(--kh-red);
+            background: var(--kh-red);
+            color: white;
+        }
+
+        /* --- RESULT SCREEN --- */
+        .result-view {
+            text-align: center;
+        }
+
+        .result-img-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .market-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+        .market-link {
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .hero-content { margin-bottom: 350px; } /* Место для карточек на мобилке */
+            .slider-wrapper { height: 300px; bottom: 0; }
+            .quiz-container { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Декоративные углы -->
+    <div class="decoration corner-tl"></div>
+    <div class="decoration corner-br"></div>
+
+    <!-- Основной экран -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Русский <span>Чай</span><br>с Душой</h1>
+            <p class="subtitle">
+                Мы производим настоящий русский чай с родных плантаций.<br>
+                Целебные травы, собранные вручную, и рецепты,<br>
+                сохраненные по заветам наших предков.<br>
+                <span class="accent-text">Почувствуй силу природы в каждом глотке.</span>
+            </p>
+            <button class="cta-btn" onclick="openQuiz()">Подобрать мой вкус</button>
+        </div>
+
+        <!-- Бесконечный слайдер -->
+        <div class="slider-wrapper">
+            <div class="track" id="slider-track">
+                <!-- Карточки генерируются JS для дублирования -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Модальное окно Квиза -->
+    <div class="modal-overlay" id="quiz-modal">
+        <div class="quiz-container">
+            <span class="close-btn" onclick="closeQuiz()">&times;</span>
+            
+            <!-- Вопрос 1 -->
+            <div class="question-step active" id="q1">
+                <div class="q-title">Какое у вас сейчас настроение?</div>
+                <div class="options">
+                    <button class="option-btn" onclick="nextQ(1, 'calm')">Хочется уюта и тепла</button>
+                    <button class="option-btn" onclick="nextQ(1, 'energy')">Нужна энергия и бодрость</button>
+                    <button class="option-btn" onclick="nextQ(1, 'mystery')">Тянет на что-то необычное</button>
+                </div>
+            </div>
+
+            <!-- Вопрос 2 -->
+            <div class="question-step" id="q2">
+                <div class="q-title">Какой вкус вам ближе?</div>
+                <div class="options">
+                    <button class="option-btn" onclick="nextQ(2, 'sweet')">Сладкий, фруктовый</button>
+                    <button class="option-btn" onclick="nextQ(2, 'sour')">С кислинкой, ягодный</button>
+                    <button class="option-btn" onclick="nextQ(2, 'fresh')">Травяной и свежий</button>
+                </div>
+            </div>
+
+            <!-- Вопрос 3 -->
+            <div class="question-step" id="q3">
+                <div class="q-title">Где бы вы хотели оказаться?</div>
+                <div class="options">
+                    <button class="option-btn" onclick="finishQuiz('mountain')">В горах среди облаков</button>
+                    <button class="option-btn" onclick="finishQuiz('forest')">В густом хвойном лесу</button>
+                    <button class="option-btn" onclick="finishQuiz('field')">В солнечном поле</button>
+                </div>
+            </div>
+
+            <!-- Результат -->
+            <div class="question-step result-view" id="result-screen">
+                <h2 style="margin-bottom:20px; color:var(--kh-red);">Ваш идеальный чай:</h2>
+                <div id="res-img" class="result-img-circle"></div>
+                <h3 id="res-title" style="font-size: 1.5rem; margin-bottom: 10px;">Название</h3>
+                <p id="res-desc" style="color:#555;">Описание</p>
+                <div class="market-links">
+                    <a href="#" class="market-link" style="background:#CB11AB">Wildberries</a>
+                    <a href="#" class="market-link" style="background:#005BFF">Ozon</a>
+                </div>
+                <button class="cta-btn" style="margin-top:20px; padding: 10px 30px; font-size:0.9rem;" onclick="closeQuiz()">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Данные о чае
+        const teaData = [
+            { id: 'taiga', name: 'Сибирская Тайга', color: 'var(--color-taiga)', icon: '🌲', ing: 'Кедр, брусника, черный чай', desc: 'Мощный хвойный аромат и терпкость дикой ягоды.' },
+            { id: 'east', name: 'Дальний Восток', color: 'var(--color-east)', icon: '🐯', ing: 'Облепиха, имбирь, лимонник', desc: 'Яркий, согревающий вкус с перчинкой.' },
+            { id: 'caucasus', name: 'Кавказские Горы', color: 'var(--color-caucasus)', icon: '🏔️', ing: 'Чабрец, мята, смородина', desc: 'Свежесть горного воздуха и сладость ягод.' },
+            { id: 'volga', name: 'Поволжье', color: 'var(--color-volga)', icon: '🌾', ing: 'Яблоко, ромашка, лист малины', desc: 'Мягкий, как летний вечер в деревне.' },
+            { id: 'karelia', name: 'Карелия', color: 'var(--color-karelia)', icon: '🫐', ing: 'Черника, можжевельник, вереск', desc: 'Глубокий вкус северных лесов.' }
+        ];
+
+        // 1. Инициализация слайдера
+        const track = document.getElementById('slider-track');
+        
+        // Функция создания HTML карточки
+        function createCardHTML(tea) {
+            return `
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front" style="background: ${tea.color};">
+                            <div class="card-icon">${tea.icon}</div>
+                            <h3>${tea.name}</h3>
+                        </div>
+                        <div class="card-back">
+                            <h4>Состав:</h4>
+                            <p>${tea.ing}</p>
+                            <br>
+                            <span style="color:var(--kh-red); font-size:2rem;">❧</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Заполняем трек карточками (дублируем много раз для бесконечности)
+        let cardsHTML = '';
+        teaData.forEach(tea => cardsHTML += createCardHTML(tea));
+        
+        // Дублируем набор 4 раза, чтобы анимация была плавной на широких экранах
+        track.innerHTML = cardsHTML + cardsHTML + cardsHTML + cardsHTML;
+
+
+        // 2. Логика Квиза
+        let userScore = {
+            taiga: 0, east: 0, caucasus: 0, volga: 0, karelia: 0
+        };
+
+        function openQuiz() {
+            document.getElementById('quiz-modal').classList.add('modal-active');
+            // Сброс
+            document.querySelectorAll('.question-step').forEach(el => el.classList.remove('active'));
+            document.getElementById('q1').classList.add('active');
+            userScore = { taiga: 0, east: 0, caucasus: 0, volga: 0, karelia: 0 };
+        }
+
+        function closeQuiz() {
+            document.getElementById('quiz-modal').classList.remove('modal-active');
+        }
+
+        function nextQ(currentStep, choice) {
+            // Простая логика начисления баллов
+            if (currentStep === 1) {
+                if (choice === 'calm') { userScore.volga += 2; userScore.caucasus += 1; }
+                if (choice === 'energy') { userScore.east += 2; userScore.taiga += 1; }
+                if (choice === 'mystery') { userScore.karelia += 2; userScore.taiga += 1; }
+            }
+            if (currentStep === 2) {
+                if (choice === 'sweet') { userScore.volga += 2; userScore.east += 1; }
+                if (choice === 'sour') { userScore.karelia += 2; userScore.caucasus += 1; }
+                if (choice === 'fresh') { userScore.caucasus += 2; userScore.taiga += 1; }
+            }
+
+            // Переход
+            document.getElementById('q' + currentStep).classList.remove('active');
+            document.getElementById('q' + (currentStep + 1)).classList.add('active');
+        }
+
+        function finishQuiz(choice) {
+            // Финальные баллы
+            if (choice === 'mountain') { userScore.caucasus += 3; userScore.east += 1; }
+            if (choice === 'forest') { userScore.taiga += 3; userScore.karelia += 2; }
+            if (choice === 'field') { userScore.volga += 3; }
+
+            // Вычисляем победителя
+            let winnerKey = Object.keys(userScore).reduce((a, b) => userScore[a] > userScore[b] ? a : b);
+            
+            // Показываем результат
+            const winnerTea = teaData.find(t => t.id === winnerKey);
+            
+            document.getElementById('q3').classList.remove('active');
+            const resultScreen = document.getElementById('result-screen');
+            resultScreen.classList.add('active');
+
+            document.getElementById('res-title').innerText = winnerTea.name;
+            document.getElementById('res-desc').innerText = winnerTea.desc;
+            document.getElementById('res-img').style.background = winnerTea.color;
+            document.getElementById('res-img').innerHTML = winnerTea.icon;
+        }
+
+        // Закрытие по клику вне окна
+        document.getElementById('quiz-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeQuiz();
+        });
+
+    </script>
+</body>
+</html>
