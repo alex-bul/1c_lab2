@@ -2,179 +2,179 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Русский Дар — Традиции Чаепития</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Русский Чай — С Душой</title>
+    
+    <!-- Подключаем Монтсеррат и Старорусский шрифт -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Ruslan+Display&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* Цвета Хохломы */
-            --kh-red: #E31E24;
-            --kh-black: #1A1919;
-            --kh-gold: #D4AF37;
-            --bg-cream: #FFFDF5;
+            --kh-red: #D22027; /* Красный как на ложках */
+            --kh-gold: #C5A065; /* Золотой */
+            --kh-black: #1E1E1E;
+            --bg-cream: #FFFDF5; /* Теплый фон */
             
-            /* Цвета чаев (согласно концепции) */
-            --color-taiga: linear-gradient(135deg, #2C3E50, #4A6572); /* Сибирь/Тайга - темный серо-синий */
-            --color-east: linear-gradient(135deg, #E67E22, #F39C12); /* Восток - оранжевый */
-            --color-caucasus: linear-gradient(135deg, #27AE60, #1E8449); /* Кавказ - зеленый */
-            --color-volga: linear-gradient(135deg, #F1C40F, #f3d250); /* Поволжье - желтый/пшеничный */
-            --color-karelia: linear-gradient(135deg, #2c2541, #483D8B); /* Карелия - темный фиолетовый/черника */
+            /* Градиенты карточек */
+            --grad-taiga: linear-gradient(135deg, #37474F 0%, #263238 100%);
+            --grad-east: linear-gradient(135deg, #E67E22 0%, #D35400 100%);
+            --grad-caucasus: linear-gradient(135deg, #27AE60 0%, #196F3D 100%);
+            --grad-volga: linear-gradient(135deg, #F4D03F 0%, #D4AC0D 100%);
+            --grad-karelia: linear-gradient(135deg, #5B2C6F 0%, #4A235A 100%);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: var(--bg-cream);
             color: var(--kh-black);
             overflow-x: hidden;
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
+            height: 100vh;
         }
 
-        /* --- ДЕКОР ХОХЛОМА (SVG фоны) --- */
-        .decoration {
+        /* --- ХОХЛОМА (Декор по углам) --- */
+        .decor {
             position: fixed;
-            z-index: 0;
+            width: 200px;
+            height: 200px;
             pointer-events: none;
+            z-index: 0;
+            opacity: 0.15; /* Легкая прозрачность, чтобы не мешало тексту */
             background-repeat: no-repeat;
             background-size: contain;
         }
 
-        /* Узоры через CSS mask или background-image (имитация) */
-        .corner-tl {
-            top: 0; left: 0;
-            width: 300px; height: 300px;
-            background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L150 0 C100 50 50 100 0 150 Z' fill='%23E31E24' opacity='0.1'/%3E%3Cpath d='M0 0 L100 0 C80 20 60 40 0 100 Z' fill='%23D4AF37' opacity='0.2'/%3E%3Ccircle cx='40' cy='40' r='10' fill='%231A1919' opacity='0.1'/%3E%3Ccircle cx='80' cy='20' r='8' fill='%23E31E24' opacity='0.1'/%3E%3C/svg%3E");
-        }
-        .corner-br {
-            bottom: 0; right: 0;
-            width: 300px; height: 300px;
-            transform: rotate(180deg);
-            background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L150 0 C100 50 50 100 0 150 Z' fill='%23E31E24' opacity='0.1'/%3E%3Cpath d='M0 0 L100 0 C80 20 60 40 0 100 Z' fill='%23D4AF37' opacity='0.2'/%3E%3C/svg%3E");
+        .decor-tl {
+            top: -20px; left: -20px;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L150 0 C100 50 50 100 0 150 Z' fill='%23D22027'/%3E%3Ccircle cx='40' cy='30' r='10' fill='%23C5A065'/%3E%3Ccircle cx='80' cy='20' r='8' fill='%231E1E1E'/%3E%3Cpath d='M0 80 Q50 80 80 130' stroke='%231E1E1E' stroke-width='4' fill='none'/%3E%3C/svg%3E");
         }
 
-        /* --- HERO SECTION --- */
-        .hero {
-            position: relative;
-            z-index: 1;
-            height: 100vh; /* На весь экран */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin-bottom: 220px; /* Отступ под слайдер */
-        }
-
-        h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--kh-black);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            line-height: 1.2;
+        .decor-tr {
+            top: -20px; right: -20px;
+            transform: rotate(90deg);
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L150 0 C100 50 50 100 0 150 Z' fill='%23D22027'/%3E%3Ccircle cx='40' cy='30' r='10' fill='%23C5A065'/%3E%3Ccircle cx='80' cy='20' r='8' fill='%231E1E1E'/%3E%3C/svg%3E");
         }
         
-        h1 span {
-            color: var(--kh-red);
-            font-family: 'Times New Roman', serif; /* Для контраста в стиле "Русь" */
-            font-style: italic;
+        /* Снизу чуть больше узора */
+        .decor-br {
+            bottom: -50px; right: -50px;
+            width: 300px; height: 300px;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M100 100 Q150 50 200 100 T300 100' stroke='%23D22027' stroke-width='2' fill='none'/%3E%3Ccircle cx='180' cy='180' r='20' fill='%23D22027' opacity='0.5'/%3E%3Ccircle cx='140' cy='190' r='15' fill='%23C5A065' opacity='0.5'/%3E%3C/svg%3E");
+            transform: rotate(180deg);
         }
 
-        .subtitle {
-            font-size: 1.2rem;
+        /* --- ГЛАВНЫЙ ЭКРАН --- */
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Распределение: текст сверху, пустота, слайдер внизу */
+            justify-content: flex-start; 
+            padding-top: 5vh; 
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: var(--kh-black);
+        }
+
+        /* ТОЛЬКО СЛОВО ЧАЙ */
+        .tea-word {
+            font-family: 'Ruslan Display', cursive; /* Странный древний шрифт */
+            color: var(--kh-red);
+            font-size: 1.3em; /* Чуть крупнее остального */
+            font-weight: 400;
+            display: inline-block;
+            transform: translateY(3px); /* Коррекция линии */
+        }
+
+        .subtitle-box {
+            max-width: 600px;
+            margin: 0 auto 35px;
+            padding: 0 20px;
+        }
+
+        .subtitle-box p {
+            font-size: 1.1rem;
             line-height: 1.6;
             font-weight: 400;
-            margin-bottom: 40px;
+            color: #444;
         }
 
-        .accent-text {
-            color: var(--kh-red);
-            font-weight: 600;
-        }
-
-        .cta-btn {
-            display: inline-block;
+        .btn-start {
             background-color: var(--kh-red);
             color: white;
-            padding: 18px 50px;
-            font-size: 1.2rem;
+            font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            border-radius: 50px;
-            text-decoration: none;
-            box-shadow: 0 10px 25px rgba(227, 30, 36, 0.4);
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 1px;
-            animation: pulse 2s infinite;
+            padding: 16px 40px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(210, 32, 39, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            z-index: 20;
         }
 
-        .cta-btn:hover {
-            background-color: transparent;
-            border-color: var(--kh-red);
-            color: var(--kh-red);
-            transform: translateY(-3px);
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(210, 32, 39, 0.5);
+            background-color: #b91b22;
         }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(227, 30, 36, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(227, 30, 36, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(227, 30, 36, 0); }
-        }
-
-        /* --- INFINITE SLIDER (MARQUEE) --- */
-        .slider-wrapper {
-            position: absolute;
-            bottom: 50px;
-            left: 0;
+        /* --- СЛАЙДЕР --- */
+        .slider-wrap {
             width: 100%;
-            height: 320px; /* Высота карточки + отступы */
+            /* Высота фиксирована, чтобы не прыгало */
+            height: 340px; 
+            margin-top: auto; /* Прибить к низу */
+            margin-bottom: 20px;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(to top, rgba(255,253,245,1) 0%, rgba(255,253,245,0) 100%);
+            position: relative;
+            /* Маска по бокам для плавного исчезновения */
+            mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
         }
 
-        .track {
+        .slider-track {
             display: flex;
             gap: 30px;
             position: absolute;
             left: 0;
-            animation: scroll 40s linear infinite;
-            padding: 0 15px;
+            padding: 10px 40px; /* Отступы для теней */
+            animation: infiniteScroll 25s linear infinite;
         }
 
-        .slider-wrapper:hover .track {
-            animation-play-state: paused; /* Стоп при наведении */
+        /* Пауза при наведении */
+        .slider-wrap:hover .slider-track {
+            animation-play-state: paused;
         }
 
-        @keyframes scroll {
+        @keyframes infiniteScroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } /* Движемся на половину (так как контент сдублирован) */
+            100% { transform: translateX(-50%); } /* Движение на 50%, так как лента сдублирована */
         }
 
-        /* --- CARD STYLES (FLIP) --- */
+        /* --- КАРТОЧКА --- */
         .card {
-            background-color: transparent;
-            width: 200px;
-            height: 280px;
-            perspective: 1000px; /* Для 3D */
+            width: 220px;
+            height: 300px;
+            perspective: 1000px;
             cursor: pointer;
+            flex-shrink: 0;
         }
 
         .card-inner {
@@ -184,22 +184,20 @@
             text-align: center;
             transition: transform 0.6s;
             transform-style: preserve-3d;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border-radius: 15px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
 
-        /* Переворот при наведении на саму карточку */
         .card:hover .card-inner {
             transform: rotateY(180deg);
         }
 
-        .card-front, .card-back {
+        .front, .back {
             position: absolute;
             width: 100%;
             height: 100%;
-            -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            border-radius: 15px;
+            border-radius: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -207,351 +205,285 @@
             padding: 20px;
         }
 
-        /* Лицевая сторона - Название и Банка (схематично) */
-        .card-front {
+        /* Лицевая */
+        .front {
             color: white;
-            justify-content: flex-end;
-            padding-bottom: 40px;
-            /* Градиент задается в HTML через style */
+            justify-content: flex-end; /* Текст внизу */
         }
 
-        .card-front h3 {
-            font-size: 1.1rem;
+        .front h3 {
+            font-size: 1rem;
             text-transform: uppercase;
+            font-weight: 700;
             letter-spacing: 1px;
+            margin-bottom: 30px;
             z-index: 2;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: auto;
-            margin-top: 40px;
-            opacity: 0.8;
         }
 
-        /* Обратная сторона - Состав */
-        .card-back {
-            background-color: white;
+        /* Эмодзи в кружке */
+        .icon-circle {
+            background: rgba(255,255,255,0.2);
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: auto; /* Push to top */
+            margin-top: 40px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Оборотная */
+        .back {
+            background: white;
             color: var(--kh-black);
             transform: rotateY(180deg);
-            border: 2px solid var(--kh-gold);
+            border: 1px solid #ddd;
         }
 
-        .card-back h4 {
+        .back h4 {
             color: var(--kh-red);
             margin-bottom: 10px;
-            font-size: 0.9rem;
+            font-family: 'Ruslan Display', cursive;
+            font-size: 1.2rem;
+        }
+        
+        .back p { font-size: 0.9rem; margin-bottom: 10px; }
+
+        /* --- АДАПТИВНОСТЬ --- */
+        @media (max-height: 750px) {
+            .hero { padding-top: 2vh; }
+            .slider-wrap { height: 280px; }
+            .card { width: 180px; height: 260px; }
+            .main-title { font-size: 2.5rem; margin-bottom: 15px; }
+            .subtitle-box { margin-bottom: 20px; }
+            .icon-circle { width: 70px; height: 70px; font-size: 2.5rem; margin-top: 20px; }
         }
 
-        .card-back p {
-            font-size: 0.85rem;
-            line-height: 1.4;
+        @media (max-width: 600px) {
+            .main-title { font-size: 2rem; }
+            .subtitle-box p { font-size: 0.95rem; }
+            .btn-start { padding: 14px 30px; font-size: 0.9rem; }
         }
 
-        /* --- QUIZ MODAL --- */
-        .modal-overlay {
+        /* --- МОДАЛКА (КВИЗ) --- */
+        .modal {
             display: none;
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(255, 253, 245, 0.95);
             z-index: 100;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background: rgba(255, 253, 245, 0.95);
             justify-content: center;
             align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s;
+            opacity: 0; transition: opacity 0.3s;
         }
+        .modal.active { opacity: 1; display: flex; }
 
-        .modal-active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .quiz-container {
+        .quiz-card {
             background: white;
-            width: 90%;
-            max-width: 600px;
-            padding: 40px;
+            padding: 30px;
+            width: 90%; max-width: 450px;
             border-radius: 20px;
-            border: 2px solid var(--kh-red);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            text-align: center;
             position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            text-align: center;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L20 0 L0 20 Z' fill='%23E31E24' opacity='0.05'/%3E%3C/svg%3E");
+            border: 1px solid var(--kh-gold);
         }
-
-        .close-btn {
-            position: absolute;
-            top: 15px; right: 20px;
-            font-size: 2rem;
+        
+        .close {
+            position: absolute; right: 20px; top: 15px;
+            font-size: 30px;
             cursor: pointer;
-            color: var(--kh-black);
-            transition: color 0.2s;
+            line-height: 20px;
+            color: #888;
         }
-        .close-btn:hover { color: var(--kh-red); }
+        .close:hover { color: var(--kh-red); }
 
-        .question-step {
-            display: none;
-            animation: fadeIn 0.4s ease;
+        .step { display: none; animation: fadeIn 0.4s; }
+        .step.active { display: block; }
+
+        .q-text {
+            font-size: 1.3rem; margin-bottom: 20px; font-weight: 600;
         }
-        .question-step.active { display: block; }
-
-        .q-title {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            font-weight: 600;
+        
+        .ans-btn {
+            display: block; width: 100%;
+            padding: 12px; margin-bottom: 10px;
+            background: white; border: 1px solid #ddd;
+            border-radius: 10px; font-family: 'Montserrat';
+            cursor: pointer; transition: 0.2s;
         }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .option-btn {
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background: white;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.2s;
+        .ans-btn:hover {
+            border-color: var(--kh-red); color: var(--kh-red);
+            background: #fff5f5;
         }
 
-        .option-btn:hover {
-            border-color: var(--kh-red);
-            background: var(--kh-red);
-            color: white;
+        .res-icon {
+            width: 100px; height: 100px; border-radius: 50%;
+            margin: 0 auto 15px; color: white; 
+            display: flex; align-items: center; justify-content: center; font-size: 3rem;
         }
-
-        /* --- RESULT SCREEN --- */
-        .result-view {
-            text-align: center;
-        }
-
-        .result-img-circle {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .market-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 25px;
-        }
+        
         .market-link {
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            font-size: 0.9rem;
+            display: inline-block; padding: 10px 20px;
+            border-radius: 8px; color: white; text-decoration: none;
+            font-weight: bold; margin: 5px; font-size: 0.9rem;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from {opacity:0; transform:translateY(10px);} to {opacity:1;} }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .hero-content { margin-bottom: 350px; } /* Место для карточек на мобилке */
-            .slider-wrapper { height: 300px; bottom: 0; }
-            .quiz-container { padding: 25px; }
-        }
     </style>
 </head>
 <body>
 
-    <!-- Декоративные углы -->
-    <div class="decoration corner-tl"></div>
-    <div class="decoration corner-br"></div>
+    <!-- Декор фона (Хохлома) -->
+    <div class="decor decor-tl"></div>
+    <div class="decor decor-tr"></div>
+    <div class="decor decor-br"></div>
 
-    <!-- Основной экран -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Русский <span>Чай</span><br>с Душой</h1>
-            <p class="subtitle">
-                Мы производим настоящий русский чай с родных плантаций.<br>
-                Целебные травы, собранные вручную, и рецепты,<br>
-                сохраненные по заветам наших предков.<br>
-                <span class="accent-text">Почувствуй силу природы в каждом глотке.</span>
-            </p>
-            <button class="cta-btn" onclick="openQuiz()">Подобрать мой вкус</button>
+        <!-- Заголовок -->
+        <h1 class="main-title">
+            <span style="font-size:0.6em; display:block; margin-bottom:5px;">Настоящий</span>
+            Русский <span class="tea-word">ЧАЙ</span><br>
+            С душой
+        </h1>
+
+        <!-- Текст -->
+        <div class="subtitle-box">
+            <p>Мы производим русский чай с родных плантаций.<br>
+            Целебные травы, собранные вручную, и рецепты,<br>
+            сохраненные по заветам наших предков.</p>
         </div>
 
-        <!-- Бесконечный слайдер -->
-        <div class="slider-wrapper">
-            <div class="track" id="slider-track">
-                <!-- Карточки генерируются JS для дублирования -->
+        <!-- Кнопка -->
+        <button class="btn-start" onclick="openQuiz()">Подобрать мой вкус</button>
+
+        <!-- Слайдер (лента) -->
+        <div class="slider-wrap">
+            <div class="slider-track" id="track">
+                <!-- Карточки вставит скрипт -->
             </div>
         </div>
     </section>
 
-    <!-- Модальное окно Квиза -->
-    <div class="modal-overlay" id="quiz-modal">
-        <div class="quiz-container">
-            <span class="close-btn" onclick="closeQuiz()">&times;</span>
-            
-            <!-- Вопрос 1 -->
-            <div class="question-step active" id="q1">
-                <div class="q-title">Какое у вас сейчас настроение?</div>
-                <div class="options">
-                    <button class="option-btn" onclick="nextQ(1, 'calm')">Хочется уюта и тепла</button>
-                    <button class="option-btn" onclick="nextQ(1, 'energy')">Нужна энергия и бодрость</button>
-                    <button class="option-btn" onclick="nextQ(1, 'mystery')">Тянет на что-то необычное</button>
-                </div>
-            </div>
-
-            <!-- Вопрос 2 -->
-            <div class="question-step" id="q2">
-                <div class="q-title">Какой вкус вам ближе?</div>
-                <div class="options">
-                    <button class="option-btn" onclick="nextQ(2, 'sweet')">Сладкий, фруктовый</button>
-                    <button class="option-btn" onclick="nextQ(2, 'sour')">С кислинкой, ягодный</button>
-                    <button class="option-btn" onclick="nextQ(2, 'fresh')">Травяной и свежий</button>
-                </div>
-            </div>
-
-            <!-- Вопрос 3 -->
-            <div class="question-step" id="q3">
-                <div class="q-title">Где бы вы хотели оказаться?</div>
-                <div class="options">
-                    <button class="option-btn" onclick="finishQuiz('mountain')">В горах среди облаков</button>
-                    <button class="option-btn" onclick="finishQuiz('forest')">В густом хвойном лесу</button>
-                    <button class="option-btn" onclick="finishQuiz('field')">В солнечном поле</button>
-                </div>
-            </div>
-
-            <!-- Результат -->
-            <div class="question-step result-view" id="result-screen">
-                <h2 style="margin-bottom:20px; color:var(--kh-red);">Ваш идеальный чай:</h2>
-                <div id="res-img" class="result-img-circle"></div>
-                <h3 id="res-title" style="font-size: 1.5rem; margin-bottom: 10px;">Название</h3>
-                <p id="res-desc" style="color:#555;">Описание</p>
-                <div class="market-links">
-                    <a href="#" class="market-link" style="background:#CB11AB">Wildberries</a>
-                    <a href="#" class="market-link" style="background:#005BFF">Ozon</a>
-                </div>
-                <button class="cta-btn" style="margin-top:20px; padding: 10px 30px; font-size:0.9rem;" onclick="closeQuiz()">Закрыть</button>
-            </div>
+    <!-- Квиз (Модальное окно) -->
+    <div class="modal" id="quizModal">
+        <div class="quiz-card">
+            <span class="close" onclick="closeQuiz()">&times;</span>
+            <div id="quizContent"></div>
         </div>
     </div>
 
     <script>
-        // Данные о чае
-        const teaData = [
-            { id: 'taiga', name: 'Сибирская Тайга', color: 'var(--color-taiga)', icon: '🌲', ing: 'Кедр, брусника, черный чай', desc: 'Мощный хвойный аромат и терпкость дикой ягоды.' },
-            { id: 'east', name: 'Дальний Восток', color: 'var(--color-east)', icon: '🐯', ing: 'Облепиха, имбирь, лимонник', desc: 'Яркий, согревающий вкус с перчинкой.' },
-            { id: 'caucasus', name: 'Кавказские Горы', color: 'var(--color-caucasus)', icon: '🏔️', ing: 'Чабрец, мята, смородина', desc: 'Свежесть горного воздуха и сладость ягод.' },
-            { id: 'volga', name: 'Поволжье', color: 'var(--color-volga)', icon: '🌾', ing: 'Яблоко, ромашка, лист малины', desc: 'Мягкий, как летний вечер в деревне.' },
-            { id: 'karelia', name: 'Карелия', color: 'var(--color-karelia)', icon: '🫐', ing: 'Черника, можжевельник, вереск', desc: 'Глубокий вкус северных лесов.' }
+        // База товаров
+        const teaList = [
+            { id: 'taiga', title: 'Сибирская Тайга', grad: 'var(--grad-taiga)', icon: '🌲', ing: 'Кедр, брусника', mood: 'energy', place: 'forest' },
+            { id: 'east', title: 'Дальний Восток', grad: 'var(--grad-east)', icon: '🐯', ing: 'Облепиха, имбирь', mood: 'energy', place: 'mountain' },
+            { id: 'caucasus', title: 'Кавказские Горы', grad: 'var(--grad-caucasus)', icon: '🏔️', ing: 'Чабрец, мята', mood: 'calm', place: 'mountain' },
+            { id: 'volga', title: 'Поволжье', grad: 'var(--grad-volga)', icon: '🌾', ing: 'Ромашка, яблоко', mood: 'calm', place: 'field' },
+            { id: 'karelia', title: 'Карелия', grad: 'var(--grad-karelia)', icon: '🫐', ing: 'Черника, можжевельник', mood: 'mystery', place: 'forest' },
         ];
 
-        // 1. Инициализация слайдера
-        const track = document.getElementById('slider-track');
-        
-        // Функция создания HTML карточки
-        function createCardHTML(tea) {
+        // 1. Генерация слайдера
+        const track = document.getElementById('track');
+        let cardsHtml = '';
+
+        function makeCard(item) {
             return `
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-front" style="background: ${tea.color};">
-                            <div class="card-icon">${tea.icon}</div>
-                            <h3>${tea.name}</h3>
-                        </div>
-                        <div class="card-back">
-                            <h4>Состав:</h4>
-                            <p>${tea.ing}</p>
-                            <br>
-                            <span style="color:var(--kh-red); font-size:2rem;">❧</span>
-                        </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="front" style="background: ${item.grad}">
+                        <div class="icon-circle">${item.icon}</div>
+                        <h3>${item.title}</h3>
+                    </div>
+                    <div class="back">
+                        <h4>Состав:</h4>
+                        <p>${item.ing}</p>
+                        <hr style="width:30%; border:1px solid #eee; margin:10px 0;">
+                        <button class="ans-btn" style="font-size:0.8rem; padding:5px;" onclick="openQuiz()">Подобрать</button>
                     </div>
                 </div>
-            `;
+            </div>`;
         }
 
-        // Заполняем трек карточками (дублируем много раз для бесконечности)
-        let cardsHTML = '';
-        teaData.forEach(tea => cardsHTML += createCardHTML(tea));
-        
-        // Дублируем набор 4 раза, чтобы анимация была плавной на широких экранах
-        track.innerHTML = cardsHTML + cardsHTML + cardsHTML + cardsHTML;
+        // Повторяем список 4 раза для бесконечности
+        for(let i=0; i<4; i++) {
+            teaList.forEach(t => cardsHtml += makeCard(t));
+        }
+        track.innerHTML = cardsHtml;
 
 
         // 2. Логика Квиза
-        let userScore = {
-            taiga: 0, east: 0, caucasus: 0, volga: 0, karelia: 0
-        };
+        const modal = document.getElementById('quizModal');
+        const content = document.getElementById('quizContent');
+        let scores = {};
 
         function openQuiz() {
-            document.getElementById('quiz-modal').classList.add('modal-active');
-            // Сброс
-            document.querySelectorAll('.question-step').forEach(el => el.classList.remove('active'));
-            document.getElementById('q1').classList.add('active');
-            userScore = { taiga: 0, east: 0, caucasus: 0, volga: 0, karelia: 0 };
+            modal.classList.add('active');
+            scores = { taiga:0, east:0, caucasus:0, volga:0, karelia:0 };
+            renderQ1();
+        }
+        function closeQuiz() { modal.classList.remove('active'); }
+
+        // Вопрос 1
+        function renderQ1() {
+            content.innerHTML = `
+                <div class="step active">
+                    <div class="q-text">Чего хочется прямо сейчас?</div>
+                    <button class="ans-btn" onclick="vote(['caucasus','volga']); renderQ2()">Успокоиться и расслабиться</button>
+                    <button class="ans-btn" onclick="vote(['taiga','east']); renderQ2()">Зарядиться энергией</button>
+                    <button class="ans-btn" onclick="vote(['karelia']); renderQ2()">Погрузиться в мысли</button>
+                </div>`;
+        }
+        // Вопрос 2
+        function renderQ2() {
+            content.innerHTML = `
+                <div class="step active">
+                    <div class="q-text">Какой вкус предпочитаете?</div>
+                    <button class="ans-btn" onclick="vote(['volga','east']); renderQ3()">Фруктовый / Сладкий</button>
+                    <button class="ans-btn" onclick="vote(['taiga','karelia']); renderQ3()">Ягодный / С кислинкой</button>
+                    <button class="ans-btn" onclick="vote(['caucasus']); renderQ3()">Травяной / Свежий</button>
+                </div>`;
+        }
+        // Вопрос 3
+        function renderQ3() {
+            content.innerHTML = `
+                <div class="step active">
+                    <div class="q-text">Куда бы отправились?</div>
+                    <button class="ans-btn" onclick="vote(['taiga','karelia']); finish()">В густой лес</button>
+                    <button class="ans-btn" onclick="vote(['caucasus','east']); finish()">В высокие горы</button>
+                    <button class="ans-btn" onclick="vote(['volga']); finish()">В чистое поле</button>
+                </div>`;
         }
 
-        function closeQuiz() {
-            document.getElementById('quiz-modal').classList.remove('modal-active');
+        function vote(ids) {
+            ids.forEach(id => scores[id]++);
         }
 
-        function nextQ(currentStep, choice) {
-            // Простая логика начисления баллов
-            if (currentStep === 1) {
-                if (choice === 'calm') { userScore.volga += 2; userScore.caucasus += 1; }
-                if (choice === 'energy') { userScore.east += 2; userScore.taiga += 1; }
-                if (choice === 'mystery') { userScore.karelia += 2; userScore.taiga += 1; }
-            }
-            if (currentStep === 2) {
-                if (choice === 'sweet') { userScore.volga += 2; userScore.east += 1; }
-                if (choice === 'sour') { userScore.karelia += 2; userScore.caucasus += 1; }
-                if (choice === 'fresh') { userScore.caucasus += 2; userScore.taiga += 1; }
-            }
+        function finish() {
+            // Ищем победителя
+            let bestId = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+            let tea = teaList.find(t => t.id === bestId);
 
-            // Переход
-            document.getElementById('q' + currentStep).classList.remove('active');
-            document.getElementById('q' + (currentStep + 1)).classList.add('active');
+            content.innerHTML = `
+                <div class="step active">
+                    <h2 class="tea-word" style="font-size:1.8rem; margin-bottom:15px;">Ваш выбор</h2>
+                    <div class="res-icon" style="background:${tea.grad}">${tea.icon}</div>
+                    <h3 style="margin-bottom:10px;">${tea.title}</h3>
+                    <p style="color:#666; margin-bottom:20px;">${tea.ing}</p>
+                    <div>
+                        <a href="#" class="market-link" style="background:#cb11ab">Wildberries</a>
+                        <a href="#" class="market-link" style="background:#005bff">Ozon</a>
+                    </div>
+                </div>`;
         }
 
-        function finishQuiz(choice) {
-            // Финальные баллы
-            if (choice === 'mountain') { userScore.caucasus += 3; userScore.east += 1; }
-            if (choice === 'forest') { userScore.taiga += 3; userScore.karelia += 2; }
-            if (choice === 'field') { userScore.volga += 3; }
-
-            // Вычисляем победителя
-            let winnerKey = Object.keys(userScore).reduce((a, b) => userScore[a] > userScore[b] ? a : b);
-            
-            // Показываем результат
-            const winnerTea = teaData.find(t => t.id === winnerKey);
-            
-            document.getElementById('q3').classList.remove('active');
-            const resultScreen = document.getElementById('result-screen');
-            resultScreen.classList.add('active');
-
-            document.getElementById('res-title').innerText = winnerTea.name;
-            document.getElementById('res-desc').innerText = winnerTea.desc;
-            document.getElementById('res-img').style.background = winnerTea.color;
-            document.getElementById('res-img').innerHTML = winnerTea.icon;
-        }
-
-        // Закрытие по клику вне окна
-        document.getElementById('quiz-modal').addEventListener('click', function(e) {
-            if (e.target === this) closeQuiz();
-        });
-
+        // Закрытие по фону
+        modal.onclick = (e) => { if(e.target === modal) closeQuiz(); }
     </script>
 </body>
 </html>
