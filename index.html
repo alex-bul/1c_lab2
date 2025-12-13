@@ -95,7 +95,8 @@
             border: none; cursor: pointer;
             box-shadow: 0 8px 25px rgba(178, 34, 34, 0.3);
             transition: transform 0.2s, background 0.2s;
-            position: relative; z-index: 20; font-size: 0.95rem;
+            position: relative; z-index: 20;
+            font-size: 0.95rem;
         }
 
         .btn-start:hover {
@@ -211,7 +212,7 @@
         .desc-text {
             font-size: 0.75rem; line-height: 1.4; color: #555;
             font-weight: 500;
-            flex-grow: 1; /* Растягивается */
+            flex-grow: 1; 
             display: flex; align-items: center; justify-content: center;
             padding: 0 5px;
         }
@@ -338,7 +339,7 @@
 
     <script>
         const teaList = [
-            /* ДАННЫЕ */
+            
             { 
                 id: 'taiga', title: 'Сибирская Тайга', grad: 'var(--grad-taiga)', icon: '🌲', 
                 effect: 'Иммунитет и Сила', 
@@ -346,6 +347,7 @@
                 desc: 'Глубокий хвойный вкус для восстановления внутреннего стержня и защиты организма.', 
                 url_wb: '#', url_ozon: '#' 
             },
+            
             { 
                 id: 'east', title: 'Дальний Восток', grad: 'var(--grad-east)', icon: '🐅', 
                 effect: 'Энергия и Огонь', 
@@ -353,6 +355,7 @@
                 desc: 'Пряный и яркий. Заряжает батарейки и разгоняет кровь лучше любого энергетика.', 
                 url_wb: '#', url_ozon: '#' 
             },
+           
             { 
                 id: 'caucasus', title: 'Кавказские Горы', grad: 'var(--grad-caucasus)', icon: '🏔️', 
                 effect: 'Свежесть и Ясность', 
@@ -360,6 +363,7 @@
                 desc: 'Как глоток горного воздуха. Освежает мысли, убирает суету и помогает дышать полной грудью.', 
                 url_wb: '#', url_ozon: '#' 
             },
+            
             { 
                 id: 'volga', title: 'Поволжье', grad: 'var(--grad-volga)', icon: '🌾', 
                 effect: 'Антистресс и Уют', 
@@ -367,6 +371,7 @@
                 desc: 'Мягко успокаивает нервную систему и гармонизирует эмоциональное состояние.', 
                 url_wb: '#', url_ozon: '#' 
             },
+           
             { 
                 id: 'karelia', title: 'Карелия', grad: 'var(--grad-karelia)', icon: '🫐', 
                 effect: 'Фокус и Дзен', 
@@ -376,7 +381,6 @@
             },
         ];
 
-        
         const track = document.getElementById('track');
         let cardsHtml = '';
 
@@ -495,7 +499,14 @@
                     <div style="width:100px; height:100px; border-radius:50%; margin:0 auto 20px; color:white; display:flex; align-items:center; justify-content:center; font-size:3rem; background:${tea.grad}; box-shadow:0 10px 20px rgba(0,0,0,0.2)">${tea.icon}</div>
                     <h3 style="margin-bottom:5px; font-size:1.3rem;">${tea.title}</h3>
                     <div style="font-weight:700; color:#555; margin-bottom:15px; font-size:1rem; text-transform:uppercase;">${tea.effect}</div>
-                    <p style="color:#555; font-size:1rem; margin-bottom:25px; line-height:1.5;">${tea.desc}</p>
+                    <p style="color:#555; font-size:1rem; margin-bottom:15px; line-height:1.5;">${tea.desc}</p>
+                    
+                    <!-- Блок состава -->
+                    <div style="margin-bottom:25px; border-top:1px solid #eee; padding-top:10px;">
+                        <span style="display:block; color:var(--kh-red); font-size:0.75rem; font-weight:800; text-transform:uppercase;">Состав</span>
+                        <div style="font-size:0.9rem; color:#111; font-weight:600;">${tea.ing}</div>
+                    </div>
+
                     <div style="display:flex; gap:10px;">
                         <a href="${tea.url_wb}" target="_blank" class="ans-btn" style="background:#8a2be2; color:white; border:none; margin:0; font-weight:700; display:flex; justify-content:center;">WB</a>
                         <a href="${tea.url_ozon}" target="_blank" class="ans-btn" style="background:#005bff; color:white; border:none; margin:0; font-weight:700; display:flex; justify-content:center;">Ozon</a>
