@@ -135,7 +135,7 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* --- CARD --- */
+        /* --- CARD FIXED --- */
         .card {
             width: 250px; height: 330px;
             perspective: 1000px; cursor: pointer;
@@ -146,7 +146,9 @@
         .card-inner {
             position: relative; width: 100%; height: 100%;
             text-align: center; transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
-            transform-style: preserve-3d; border-radius: 16px;
+            transform-style: preserve-3d; 
+            -webkit-transform-style: preserve-3d; /* Фикс для iOS */
+            border-radius: 16px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
@@ -155,13 +157,21 @@
 
         .front, .back {
             position: absolute; width: 100%; height: 100%;
-            backface-visibility: hidden; border-radius: 16px;
+            -webkit-backface-visibility: hidden; /* Фикс для iOS */
+            backface-visibility: hidden;
+            border-radius: 16px;
             display: flex; flex-direction: column;
             justify-content: center; align-items: center;
         }
 
         /* FRONT */
-        .front { color: white; justify-content: flex-end; padding: 20px; }
+        .front { 
+            /* Если перевернуто, мы скрываем, но на всякий случай z-index */
+            z-index: 2; 
+            color: white; 
+            justify-content: flex-end; padding: 20px; 
+        }
+        
         .front h3 {
             font-size: 1.1rem; text-transform: uppercase;
             font-weight: 800; letter-spacing: 1px;
@@ -178,12 +188,14 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
-        /* BACK */
+        /* BACK - FIX MOBILE BLEEDING */
         .back {
             background-color: var(--paper-color);
             color: var(--kh-black);
-            transform: rotateY(180deg);
             padding: 12px;
+            z-index: 1;
+            /* translateZ(1px) физически перекрывает переднюю сторону при повороте */
+            transform: rotateY(180deg) translateZ(1px); 
         }
 
         .back-content-frame {
@@ -339,7 +351,7 @@
 
     <script>
         const teaList = [
-            
+            /* ДАННЫЕ */
             { 
                 id: 'taiga', title: 'Сибирская Тайга', grad: 'var(--grad-taiga)', icon: '🌲', 
                 effect: 'Иммунитет и Сила', 
@@ -347,7 +359,6 @@
                 desc: 'Глубокий хвойный вкус для восстановления внутреннего стержня и защиты организма.', 
                 url_wb: '#', url_ozon: '#' 
             },
-            
             { 
                 id: 'east', title: 'Дальний Восток', grad: 'var(--grad-east)', icon: '🐅', 
                 effect: 'Энергия и Огонь', 
@@ -355,7 +366,6 @@
                 desc: 'Пряный и яркий. Заряжает батарейки и разгоняет кровь лучше любого энергетика.', 
                 url_wb: '#', url_ozon: '#' 
             },
-           
             { 
                 id: 'caucasus', title: 'Кавказские Горы', grad: 'var(--grad-caucasus)', icon: '🏔️', 
                 effect: 'Свежесть и Ясность', 
@@ -363,7 +373,6 @@
                 desc: 'Как глоток горного воздуха. Освежает мысли, убирает суету и помогает дышать полной грудью.', 
                 url_wb: '#', url_ozon: '#' 
             },
-            
             { 
                 id: 'volga', title: 'Поволжье', grad: 'var(--grad-volga)', icon: '🌾', 
                 effect: 'Антистресс и Уют', 
@@ -371,7 +380,6 @@
                 desc: 'Мягко успокаивает нервную систему и гармонизирует эмоциональное состояние.', 
                 url_wb: '#', url_ozon: '#' 
             },
-           
             { 
                 id: 'karelia', title: 'Карелия', grad: 'var(--grad-karelia)', icon: '🫐', 
                 effect: 'Фокус и Дзен', 
@@ -381,6 +389,7 @@
             },
         ];
 
+        
         const track = document.getElementById('track');
         let cardsHtml = '';
 
